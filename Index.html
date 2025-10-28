@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KADRA | Global Music House</title>
+    
+<script src="https://cdn.tailwindcss.com"></script>
+    
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* General Style */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d0d; /* Deep Black */
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        /* Primary Accent Color - Aggressive Red (Black Star Style) */
+        .accent-red {
+            color: #E5004F; /* Saturated and aggressive red */
+        }
+        /* Glow effect for logo and accents */
+        .text-glow {
+            text-shadow: 0 0 10px rgba(229, 0, 79, 0.6);
+        }
+        
+        /* MAIN COMPONENTS */
+        
+        /* Button/Link styles (sharper and more aggressive) */
+        .primary-button {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(229, 0, 79, 0.4);
+            border: 2px solid #E5004F;
+        }
+        .primary-button:hover {
+            background-color: #E5004F;
+            color: #0d0d0d;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(229, 0, 79, 0.8);
+        }
+        
+        /* Studio section - more premium look */
+        .studio-image-container {
+            position: relative;
+            width: 100%;
+            max-height: 500px;
+            overflow: hidden;
+            border-bottom: 5px solid #E5004F; /* Aggressive line */
+        }
+        .studio-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.65) contrast(1.1);
+        }
+        
+        /* Styles for horizontal artist scroll */
+        .artist-scroll-container::-webkit-scrollbar { height: 6px; }
+        .artist-scroll-container::-webkit-scrollbar-track { background: #1a1a1a; }
+        .artist-scroll-container::-webkit-scrollbar-thumb { background: #E5004F; border-radius: 3px; }
+        
+        /* Styles for social links - aggressive hover */
+        .social-link {
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            border: 2px solid #222;
+        }
+        .social-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(229, 0, 79, 0.7);
+            border-color: #E5004F;
+        }
+        
+        /* Footer styles - sharp lines */
+        .footer-link-group a {
+            position: relative;
+            transition: color 0.2s;
+        }
+        .footer-link-group a:hover {
+            color: #E5004F;
+        }
+
+        /* SPOTIFY-STYLE PLAYERS */
+        .player-card {
+            background-color: #1a1a1a; /* Dark base */
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+        .player-card:hover {
+            background-color: #222;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(229, 0, 79, 0.3);
+        }
+        
+        /* Container for cover and button, for relative positioning */
+        .player-cover-container {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+        }
+
+        .player-cover {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: filter 0.3s ease; /* For dimming effect */
+        }
+        
+        /* Dim cover on hover */
+        .player-card:hover .player-cover {
+            filter: brightness(0.7);
+        }
+
+        /* Play Button (appears on hover) - CENTERED ON COVER */
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8); /* Hide and shrink */
+            background-color: #E5004F;
+            color: #0d0d0d;
+            width: 60px; /* Increased size */
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Spring animation */
+            box-shadow: 0 4px 20px rgba(229, 0, 79, 0.8);
+        }
+        /* Show Play button on card hover */
+        .player-card:hover .play-button {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* ARTIST STYLES (ROUND CARDS) */
+        .artist-circle-card {
+            flex-shrink-0; 
+            width: 140px; 
+            text-align: center;
+            transition: transform 0.3s ease; 
+            padding: 10px; 
+        }
+        .artist-circle-card:hover {
+            transform: translateY(-5px); 
+        }
+        .artist-circle-card img {
+            width: 120px; 
+            height: 120px;
+            border-radius: 50%; 
+            object-fit: cover;
+            margin: 0 auto 10px auto; 
+            border: 3px solid #333; 
+            transition: border-color 0.3s ease, filter 0.3s ease;
+        }
+        .artist-circle-card:hover img {
+            border-color: #E5004F; 
+            filter: brightness(0.8); 
+        }
+        .artist-circle-card p {
+            font-size: 0.9rem;
+            color: #ffffff;
+            font-weight: bold;
+            text-transform: uppercase;
+            white-space: normal; 
+        }
+        .artist-circle-card .artist-role {
+            font-size: 0.7rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* REDESIGNED PRICE CARD STYLES */
+        .price-card {
+            background-color: #1a1a1a;
+            border: 2px solid #333;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 2.5rem; /* Increased padding */
+        }
+        .price-card:hover {
+            border-color: #E5004F;
+            box-shadow: 0 0 15px rgba(229, 0, 79, 0.4);
+            transform: translateY(-5px);
+        }
+        
+        /* PLATINUM CARD - Aggressive Design */
+        .platinum-card {
+            background-color: #000000; /* Pure black for maximum contrast */
+            border: 5px solid #E5004F;
+            box-shadow: 0 0 35px rgba(229, 0, 79, 0.9);
+            position: relative;
+            z-index: 20; /* To overlap slightly */
+            transform: scale(1.05); /* Slightly bigger */
+            padding: 3rem 2.5rem; /* More vertical padding */
+        }
+        .platinum-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background-color: #E5004F;
+        }
+        .platinum-card:hover {
+            transform: scale(1.07);
+            box-shadow: 0 0 50px rgba(229, 0, 79, 1);
+        }
+
+        /* Feature list styling */
+        .feature-item {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed #2d2d2d;
+        }
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body onload="loadLanguage()">
+
+
+<header class="bg-black sticky top-0 z-50 border-b border-gray-800 shadow-xl">
+    <nav class="max-w-7xl mx-auto p-5 flex justify-between items-center">
+        
+        <a href="#" class="text-3xl font-black tracking-widest accent-red text-glow hover:opacity-80 transition duration-300">
+            KADRA
+        </a>
+
+        
+        <div class="hidden md:flex space-x-10 font-extrabold text-sm tracking-widest items-center">
+            <a href="#about" class="nav-link text-white hover:text-red-500 transition duration-300 uppercase" data-i18n="nav_about">ABOUT US</a>
+            <a href="#pricing" class="nav-link text-white hover:text-red-500 transition duration-300 uppercase" data-i18n="nav_services">SERVICES</a>
+            <a href="#projects" class="nav-link text-white hover:text-red-500 transition duration-300 uppercase" data-i18n="nav_portfolio">PORTFOLIO</a>
+            <a href="#contact" class="nav-link accent-red hover:text-white transition duration-300 uppercase" data-i18n="nav_contact">CONTACT</a>
+
+            <!-- Language Switcher -->
+            <button id="lang-switch-button" onclick="toggleLanguage()" class="ml-6 px-3 py-1 text-xs font-black uppercase tracking-widest border border-gray-600 rounded-full hover:border-red-500 transition duration-300">
+                EN / RU
+            </button>
+        </div>
+
+        
+        <div class="md:hidden flex items-center space-x-4">
+            <!-- Mobile Language Switcher -->
+            <button id="mobile-lang-switch-button" onclick="toggleLanguage()" class="px-3 py-1 text-xs font-black uppercase tracking-widest border border-gray-600 rounded-full hover:border-red-500 transition duration-300">
+                EN / RU
+            </button>
+            <button id="mobile-menu-button" class="text-2xl text-white focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            </button>
+        </div>
+    </nav>
+    
+    
+    <div id="mobile-menu" class="hidden md:hidden bg-black border-t border-gray-800">
+        <div class="flex flex-col p-4 space-y-3 font-semibold text-center">
+            <a href="#about" onclick="toggleMenu()" class="nav-link-mobile block text-white hover:text-red-500 py-2 uppercase border-b border-gray-800" data-i18n="nav_about">ABOUT US</a>
+            <a href="#pricing" onclick="toggleMenu()" class="nav-link-mobile block text-white hover:text-red-500 py-2 uppercase border-b border-gray-800" data-i18n="nav_services_pricing">SERVICES & PRICING</a>
+            <a href="#projects" onclick="toggleMenu()" class="nav-link-mobile block text-white hover:text-red-500 py-2 uppercase border-b border-gray-800" data-i18n="nav_portfolio">PORTFOLIO</a>
+            <a href="#contact" onclick="toggleMenu()" class="nav-link-mobile block accent-red hover:text-white py-2 uppercase" data-i18n="nav_contact">CONTACT</a>
+        </div>
+    </div>
+</header>
+
+
+<section class="text-center py-24 sm:py-32 px-4 max-w-7xl mx-auto border-b-4 border-gray-900">
+    <h1 class="text-6xl sm:text-8xl lg:text-9xl font-black tracking-tighter mb-4 uppercase text-white">
+        <span class="accent-red text-glow">KADRA</span>
+    </h1>
+    <h2 class="text-xl sm:text-3xl font-light tracking-widest mb-10 text-gray-300 uppercase" data-i18n="hero_subtitle">
+        GLOBAL MUSIC HOUSE
+    </h2>
+    
+    <p class="text-lg sm:text-xl mb-12 text-gray-400 max-w-4xl mx-auto" data-i18n="hero_tagline">
+        PRODUCTION. <span class="accent-red font-bold">INNOVATION.</span> PLATINUM. <span class="text-white font-bold">YOUR SOUND IS LUXURY.</span>
+    </p>
+
+    
+    <a href="#contact" class="primary-button inline-block px-10 py-4 rounded-none bg-black text-white font-black uppercase tracking-widest text-base shadow-xl" data-i18n="hero_button">
+        ORDER PRODUCTION
+    </a>
+
+    <div class="mt-16 text-sm font-medium tracking-wide text-gray-600 uppercase border-t border-b border-gray-800 py-4 max-w-2xl mx-auto" data-i18n="hero_locations">
+        MOSCOW (HUB) <span class="mx-4 accent-red">|</span> PHUKET (RESIDENCY)
+    </div>
+</section>
+
+
+<section class="studio-image-container mb-16">
+    <img src="../../Desktop/Сайты/Ruslan Gudz KADRA/картинка 1.png" alt="Modern Recording Studio" class="studio-image">
+</section>
+
+
+<section id="services" class="py-16 px-4 max-w-7xl mx-auto">
+    <h2 class="text-3xl sm:text-5xl font-black accent-red mb-12 uppercase border-b-2 border-red-600 pb-3 inline-block" data-i18n="services_title">DIGITAL PRODUCTION</h2>
+    
+    <p class="text-gray-400 mb-16 max-w-4xl text-lg" data-i18n="services_intro">
+        We break geographical barriers. Your project achieves studio quality and Platinum Standard, regardless of your location.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-8">
+        
+        <div class="p-8 border-l-4 border-red-600 bg-gray-900/50 hover:bg-gray-800 transition duration-300 shadow-2xl">
+            <i class="fas fa-satellite-dish text-4xl accent-red mb-4"></i>
+            <h3 class="text-xl font-bold mb-2 uppercase text-white tracking-wider" data-i18n="service1_title">GLOBAL REACH</h3>
+            <p class="text-sm text-gray-400" data-i18n="service1_text">100% ONLINE. Working with time zones from Moscow to New York, ensuring perfect sync.</p>
+        </div>
+
+        
+        <div class="p-8 border-l-4 border-red-600 bg-gray-900/50 hover:bg-gray-800 transition duration-300 shadow-2xl">
+            <i class="fas fa-star text-4xl accent-red mb-4"></i>
+            <h3 class="text-xl font-bold mb-2 uppercase text-white tracking-wider" data-i18n="service2_title">PLATINUM STANDARD</h3>
+            <p class="text-sm text-gray-400" data-i18n="service2_text">Chart-proven quality. Tracks created at KADRA regularly hit TOP lists.</p>
+        </div>
+
+        
+        <div class="p-8 border-l-4 border-red-600 bg-gray-900/50 hover:bg-gray-800 transition duration-300 shadow-2xl">
+            <i class="fas fa-chart-line text-4xl accent-red mb-4"></i>
+            <h3 class="text-xl font-bold mb-2 uppercase text-white tracking-wider" data-i18n="service3_title">BUSINESS APPROACH</h3>
+            <p class="text-sm text-gray-400" data-i18n="service3_text">We don't just make music. We build sonic identity that sells your brand and maximizes royalties.</p>
+        </div>
+    </div>
+</section>
+
+
+<section id="projects" class="py-20 px-4 max-w-7xl mx-auto border-t-4 border-gray-900">
+    <h2 class="text-3xl sm:text-5xl font-black text-white mb-12 uppercase border-b-2 border-red-600 pb-3 inline-block" data-i18n="projects_title">PLATINUM SOUND</h2>
+    <p class="text-gray-400 mb-10 max-w-4xl text-lg" data-i18n="projects_intro">
+        Listen to the best releases created with our involvement. Every track is a potential hit. <span class="accent-red" data-i18n="projects_cta">Hover and press PLAY.</span>
+    </p>
+
+    
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8">
+        
+        
+        <div class="player-card p-4 rounded-lg">
+            <div class="player-cover-container rounded-md mb-4 shadow-xl">
+                <img src="3. Леопард.jpg" alt="Album cover Mekhman" class="player-cover">
+                <button class="play-button">
+                    <i class="fas fa-play text-2xl ml-1"></i>
+                </button>
+            </div>
+            <div class="space-y-1">
+                <h3 class="text-lg font-black text-white truncate uppercase">PIRATE COPY</h3>
+                <p class="text-sm text-gray-400 truncate" data-i18n="prod_mekhman">MEKHMAN (Full Prod. KADRA)</p>
+            </div>
+        </div>
+        
+        
+        <div class="player-card p-4 rounded-lg">
+            <div class="player-cover-container rounded-md mb-4 shadow-xl">
+                <img src="https://placehold.co/400x400/333333/E5004F?text=TKIMALI" alt="Album cover Tkimali" class="player-cover">
+                <button class="play-button">
+                    <i class="fas fa-play text-2xl ml-1"></i>
+                </button>
+            </div>
+            <div class="space-y-1">
+                <h3 class="text-lg font-black text-white truncate uppercase">NORTH</h3>
+                <p class="text-sm text-gray-400 truncate" data-i18n="prod_tkimali">TKIMALI ft. Lolita (Sound Design KADRA)</p>
+            </div>
+        </div>
+        
+        
+        <div class="player-card p-4 rounded-lg">
+            <div class="player-cover-container rounded-md mb-4 shadow-xl">
+                <img src="https://placehold.co/400x400/E5004F/0d0d0d?text=ZOMB" alt="Album cover Zomb" class="player-cover">
+                <button class="play-button">
+                    <i class="fas fa-play text-2xl ml-1"></i>
+                </button>
+            </div>
+            <div class="space-y-1">
+                <h3 class="text-lg font-black text-white truncate uppercase">QUEEN</h3>
+                <p class="text-sm text-gray-400 truncate" data-i18n="prod_zomb">ZOMB (Mastering by KADRA)</p>
+            </div>
+        </div>
+
+        
+        <div class="player-card p-4 rounded-lg">
+            <div class="player-cover-container rounded-md mb-4 shadow-xl">
+                <img src="https://placehold.co/400x400/555555/E5004F?text=GANVEST" alt="Album cover Ganvest" class="player-cover">
+                <button class="play-button">
+                    <i class="fas fa-play text-2xl ml-1"></i>
+                </button>
+            </div>
+            <div class="space-y-1">
+                <h3 class="text-lg font-black text-white truncate uppercase">NICOTINE</h3>
+                <p class="text-sm text-gray-400 truncate" data-i18n="prod_ganvest">GANVEST (Mixing & Mastering)</p>
+            </div>
+        </div>
+        
+        
+        <div class="player-card p-4 rounded-lg">
+            <div class="player-cover-container rounded-md mb-4 shadow-xl">
+                <img src="https://placehold.co/400x400/333333/ffffff?text=KAGRAMANOV" alt="Album cover Kagramanov" class="player-cover">
+                <button class="play-button">
+                    <i class="fas fa-play text-2xl ml-1"></i>
+                </button>
+            </div>
+            <div class="space-y-1">
+                <h3 class="text-lg font-black text-white truncate uppercase">PANTHER</h3>
+                <p class="text-sm text-gray-400 truncate" data-i18n="prod_kagramanov">KAGRAMANOV (Sound Engineering)</p>
+            </div>
+        </div>
+
+        
+        <div class="player-card p-4 rounded-lg">
+            <div class="player-cover-container rounded-md mb-4 shadow-xl border-2 border-red-600">
+                <img src="https://placehold.co/400x400/0d0d0d/E5004F?text=BEAT+EXCLUSIVE" alt="Beat production cover" class="player-cover">
+                <button class="play-button">
+                    <i class="fas fa-play text-2xl ml-1"></i>
+                </button>
+            </div>
+            <div class="space-y-1">
+                <h3 class="text-lg font-black accent-red truncate uppercase" data-i18n="prod_beat_title">NEW BEAT</h3>
+                <p class="text-sm text-gray-400 truncate" data-i18n="prod_beat_subtitle">EXCLUSIVE | CHILL WAVE</p>
+            </div>
+        </div>
+        
+        
+        <div class="player-card p-4 rounded-lg">
+            <div class="player-cover-container rounded-md mb-4 shadow-xl">
+                <img src="https://placehold.co/400x400/666666/ffffff?text=REMIX" alt="Remix cover" class="player-cover">
+                <button class="play-button">
+                    <i class="fas fa-play text-2xl ml-1"></i>
+                </button>
+            </div>
+            <div class="space-y-1">
+                <h3 class="text-lg font-black text-white truncate uppercase" data-i18n="prod_remix_title">FIRE BEAT REMIX</h3>
+                <p class="text-sm text-gray-400 truncate" data-i18n="prod_remix_subtitle">PROD. KADRA</p>
+            </div>
+        </div>
+        
+        
+        <div class="player-card p-4 rounded-lg">
+            <div class="player-cover-container rounded-md mb-4 shadow-xl">
+                <img src="https://placehold.co/400x400/E5004F/0d0d0d?text=SAMPLE+PACK" alt="Sample pack cover" class="player-cover">
+                
+                <button class="play-button">
+                    <i class="fas fa-download text-xl"></i>
+                </button>
+            </div>
+            <div class="space-y-1">
+                <h3 class="text-lg font-black text-white truncate uppercase" data-i18n="prod_sample_title">SAMPLE PACK V3</h3>
+                <p class="text-sm text-gray-400 truncate" data-i18n="prod_sample_subtitle">ROYALTY FREE | DOWNLOAD</p>
+            </div>
+        </div>
+        
+    </div>
+
+    
+    <div class="text-center mt-16">
+        <a href="#contact" class="primary-button inline-block px-8 py-3 rounded-none bg-black text-white font-black uppercase tracking-widest text-sm border-gray-700 hover:border-red-600" data-i18n="projects_button">
+            MORE PROJECTS
+        </a>
+    </div>
+</section>
+
+<section class="py-16 px-4">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl sm:text-5xl font-black text-white mb-10 uppercase border-b-2 border-red-600 pb-3 inline-block" data-i18n="team_title">OUR TEAM & PARTNERS</h2>
+
+        <div class="artist-scroll-container flex space-x-6 pb-6 overflow-x-auto whitespace-nowrap">
+            
+            
+            <div class="artist-circle-card">
+                <img src="https://placehold.co/120x120/E5004F/0d0d0d?text=TKM" alt="Photo of Tkimali">
+                <p>Tkimali</p>
+                <p class="artist-role" data-i18n="team_tkimali_role">PRODUCER</p>
+            </div>
+
+            
+            <div class="artist-circle-card">
+                <img src="https://placehold.co/120x120/333333/ffffff?text=MEK" alt="Photo of Mekhman">
+                <p>Mekhman</p>
+                <p class="artist-role">68M+ HITS</p>
+            </div>
+            
+            
+            <div class="artist-circle-card">
+                <img src="https://placehold.co/120x120/555555/ffffff?text=GVT" alt="Photo of Ganvest">
+                <p>Ganvest</p>
+                <p class="artist-role" data-i18n="team_ganvest_role">MASTERING</p>
+            </div>
+            
+            
+            <div class="artist-circle-card">
+                <img src="https://placehold.co/120x120/999999/ffffff?text=LOL" alt="Photo of Lolita">
+                <p>Lolita</p>
+                <p class="artist-role" data-i18n="team_lolita_role">COLLAB</p>
+            </div>
+            
+            
+            <div class="artist-circle-card">
+                <img src="https://placehold.co/120x120/777777/ffffff?text=KGR" alt="Photo of Kagramanov">
+                <p>Kagramanov</p>
+                <p class="artist-role" data-i18n="team_kagramanov_role">PANTHER</p>
+            </div>
+
+            
+            <div class="artist-circle-card">
+                <img src="https://placehold.co/120x120/E5004F/0d0d0d?text=NEW" alt="New Artist">
+                <p data-i18n="team_new_artist_name">NEW ARTIST</p>
+                <p class="artist-role" data-i18n="team_new_artist_role">SOUND DESIGN</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="pricing" class="py-20 px-4 max-w-7xl mx-auto border-t-4 border-gray-900">
+    <h2 class="text-3xl sm:text-5xl font-black text-white mb-16 uppercase border-b-2 border-red-600 pb-3 inline-block" data-i18n="pricing_title">INVESTMENT IN SOUND</h2>
+
+    <div class="grid md:grid-cols-3 gap-8 lg:gap-12 items-center">
+
+        <!-- CARD 1: GOLD (ENGINEERING) -->
+        <div class="price-card rounded-xl">
+            <h3 class="text-2xl font-black uppercase text-white mb-2 tracking-widest" data-i18n="price_gold_title">GOLD</h3>
+            <p class="text-gray-400 mb-6 font-medium uppercase text-sm" data-i18n="price_gold_subtitle">Mixing & Mastering</p>
+
+            <p class="text-4xl font-extrabold accent-red mb-8">
+                30 000 ₽ <span class="text-base text-gray-500 font-normal" data-i18n="price_gold_unit">/ TRACK</span>
+            </p>
+
+            <div class="space-y-2 mb-10">
+                <div class="feature-item">
+                    <i class="fas fa-check text-green-500 mr-3 flex-shrink-0"></i>
+                    <p class="text-gray-300 font-medium" data-i18n="gold_feature1">Full Audio Engineering</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-sliders-h text-red-500 mr-3 flex-shrink-0"></i>
+                    <p class="text-gray-300" data-i18n="gold_feature2">Vocal Tuning / Correction (Included)</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-volume-up text-red-500 mr-3 flex-shrink-0"></i>
+                    <p class="text-gray-300" data-i18n="gold_feature3">CHART READY Loudness</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-clock text-gray-500 mr-3 flex-shrink-0"></i>
+                    <p class="text-gray-300" data-i18n="gold_feature4">Turnaround: 4–6 business days</p>
+                </div>
+            </div>
+
+            <a href="#contact" class="primary-button block text-center px-6 py-3 rounded-none bg-black text-white font-black uppercase tracking-widest text-sm shadow-xl mt-auto" data-i18n="gold_button">
+                ORDER GOLD
+            </a>
+        </div>
+
+        <!-- CARD 2: PLATINUM (BEST CHOICE) - NEW AGGRESSIVE DESIGN -->
+        <div class="platinum-card rounded-xl">
+            
+            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-red-600 px-6 py-1 rounded-full text-xs font-black uppercase tracking-widest text-black shadow-lg" data-i18n="platinum_tag">
+                BEST CHOICE
+            </div>
+
+            <h3 class="text-4xl font-black uppercase text-white mb-2 tracking-widest pt-4" data-i18n="price_platinum_title">PLATINUM</h3>
+            <p class="text-red-400 mb-8 font-black uppercase text-base" data-i18n="price_platinum_subtitle">TURNKEY PRODUCTION</p>
+
+            <p class="text-6xl font-extrabold accent-red mb-10">
+                150 000 ₽ <span class="text-lg text-gray-300 font-normal" data-i18n="price_platinum_unit">/ TRACK</span>
+            </p>
+
+            <div class="space-y-2 mb-10 text-left">
+                <div class="feature-item">
+                    <i class="fas fa-bolt text-red-400 mr-3 text-xl flex-shrink-0"></i>
+                    <p class="text-white font-black" data-i18n="platinum_feature1">Full Music Production (From Idea to Master)</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-music text-red-400 mr-3 text-xl flex-shrink-0"></i>
+                    <p class="text-white font-black" data-i18n="platinum_feature2">Mixing & Mastering <span class="text-sm text-gray-400" data-i18n="platinum_feature2_addon">(INCLUDED)</span></p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-copyright text-red-400 mr-3 text-xl flex-shrink-0"></i>
+                    <p class="text-white font-black" data-i18n="platinum_feature3">100% EXCLUSIVE Rights</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-rocket text-red-400 mr-3 text-xl flex-shrink-0"></i>
+                    <p class="text-white font-black" data-i18n="platinum_feature4">Priority Studio Slot</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-headset text-red-400 mr-3 text-xl flex-shrink-0"></i>
+                    <p class="text-white font-black" data-i18n="platinum_feature5">Producer On-Call Support</p>
+                </div>
+            </div>
+
+            <a href="#contact" class="primary-button block text-center px-6 py-4 rounded-none bg-red-600 text-black font-black uppercase tracking-widest text-base shadow-2xl mt-auto border-none hover:bg-red-500" data-i18n="platinum_button">
+                START PLATINUM PROD
+            </a>
+        </div>
+
+        <!-- CARD 3: EXCLUSIVE (BEATMAKING) -->
+        <div class="price-card rounded-xl">
+            <h3 class="text-2xl font-black uppercase text-white mb-2 tracking-widest" data-i18n="price_exclusive_title">EXCLUSIVE</h3>
+            <p class="text-gray-400 mb-6 font-medium uppercase text-sm" data-i18n="price_exclusive_subtitle">Custom Beat</p>
+
+            <p class="text-4xl font-extrabold accent-red mb-8">
+                40 000 ₽ <span class="text-base text-gray-500 font-normal" data-i18n="price_exclusive_unit">/ BEAT</span>
+            </p>
+
+            <div class="space-y-2 mb-10">
+                <div class="feature-item">
+                    <i class="fas fa-fingerprint text-green-500 mr-3 flex-shrink-0"></i>
+                    <p class="text-gray-300 font-medium" data-i18n="exclusive_feature1">Unique Custom Beat</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-compress-alt text-red-500 mr-3 flex-shrink-0"></i>
+                    <p class="text-gray-300" data-i18n="exclusive_feature2">Exclusive Rights for Monetization</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-layer-group text-red-500 mr-3 flex-shrink-0"></i>
+                    <p class="text-gray-300" data-i18n="exclusive_feature3">WAV/MP3 + STEMS (Tracks)</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-sync-alt text-gray-500 mr-3 flex-shrink-0"></i>
+                    <p class="text-gray-300" data-i18n="exclusive_feature4">Up to 3 rounds of revisions</p>
+                </div>
+            </div>
+
+            <a href="#contact" class="primary-button block text-center px-6 py-3 rounded-none bg-black text-white font-black uppercase tracking-widest text-sm shadow-xl mt-auto" data-i18n="exclusive_button">
+                ORDER EXCLUSIVE
+            </a>
+        </div>
+    </div>
+    
+    <div class="text-center mt-16 text-gray-500 text-sm italic border-t border-gray-800 pt-8">
+        <p data-i18n="pricing_disclaimer">Prices are for reference. The exact cost is calculated individually after discussing the technical brief.</p>
+    </div>
+</section>
+
+
+<section id="contact" class="py-20 px-4 max-w-7xl mx-auto border-t-4 border-gray-900">
+    <h2 class="text-3xl sm:text-5xl font-black text-white mb-12 uppercase border-b-2 border-red-600 pb-3 inline-block" data-i18n="contact_title">CONTACT US</h2>
+
+    <p class="text-lg text-gray-400 mb-12 max-w-4xl" data-i18n="contact_intro">
+        Write to us via your preferred messenger or submit a request. We will contact you within one business day.
+    </p>
+
+    <div class="grid grid-cols-3 gap-6 sm:gap-12 justify-items-center max-w-xl mx-auto">
+        
+
+<a href="#" class="social-link flex items-center justify-center w-20 h-20 sm:w-28 sm:h-28 bg-gray-900 rounded-lg group shadow-xl hover:bg-black/50" target="_blank" aria-label="VKontakte">
+            <i class="fab fa-vk text-4xl sm:text-6xl text-blue-500 group-hover:text-red-600 transition"></i>
+        </a>
+
+        
+
+<a href="#" class="social-link flex items-center justify-center w-20 h-20 sm:w-28 sm:h-28 bg-gray-900 rounded-lg group shadow-xl hover:bg-black/50" target="_blank" aria-label="Telegram">
+            <i class="fab fa-telegram-plane text-4xl sm:text-6xl text-sky-500 group-hover:text-red-600 transition"></i>
+        </a>
+
+        
+
+<a href="#" class="social-link flex items-center justify-center w-20 h-20 sm:w-28 sm:h-28 bg-gray-900 rounded-lg group shadow-xl hover:bg-black/50" target="_blank" aria-label="WhatsApp">
+            <i class="fab fa-whatsapp text-4xl sm:text-6xl text-green-500 group-hover:text-red-600 transition"></i>
+        </a>
+    </div>
+</section>
+
+
+<footer class="bg-black border-t-4 border-red-600 mt-20 py-16 px-4">
+    <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10 text-sm">
+
+        
+
+<div class="col-span-2 md:col-span-1 space-y-4">
+            <div class="text-3xl font-black tracking-widest accent-red text-glow">KADRA</div>
+            <p class="text-red-400 text-xs uppercase tracking-widest font-bold" data-i18n="footer_slogan">
+                PRODUCTION AIMED AT CHARTS
+            </p>
+            <p class="text-gray-500 text-xs" data-i18n="footer_mission">
+                We are your strategic partner in the music world, guaranteeing world-class sound.
+            </p>
+        </div>
+
+        
+
+<div class="footer-link-group space-y-3">
+            <h4 class="text-md font-black mb-3 uppercase tracking-widest text-white border-b border-gray-800 pb-1" data-i18n="footer_menu_title">MENU</h4>
+            <a href="#about" class="block text-gray-400 hover:text-red-600 transition" data-i18n="nav_about">About Us</a>
+            <a href="#projects" class="block text-gray-400 hover:text-red-600 transition" data-i18n="nav_portfolio">Portfolio</a>
+            <a href="#pricing" class="block text-gray-400 hover:text-red-600 transition" data-i18n="nav_services_pricing">Services & Pricing</a>
+            <a href="#contact" class="block text-gray-400 hover:text-red-600 transition" data-i18n="footer_request">Request</a>
+        </div>
+
+        
+
+<div class="footer-link-group space-y-3">
+            <h4 class="text-md font-black mb-3 uppercase tracking-widest text-white border-b border-gray-800 pb-1" data-i18n="footer_contacts_title">CONTACTS</h4>
+            
+            <div class="text-gray-400 flex items-center">
+                <i class="fas fa-envelope mr-3 text-red-500"></i>
+                <a href="mailto:info@kadra.global" class="hover:text-red-600">thekadrainfo@gmail.com</a>
+            </div>
+            
+            <div class="text-gray-400 flex items-center">
+                <i class="fas fa-phone mr-3 text-red-500"></i>
+                <a href="tel:+79998887766" class="hover:text-red-600">+7 (961) 077-74-03</a>
+            </div>
+            
+            <p class="text-gray-600 pt-3 text-xs uppercase tracking-widest" data-i18n="footer_call_hours">
+                CALL HOURS: MON-FRI
+      </p>
+        </div>
+
+        
+
+<div class="footer-link-group space-y-3">
+            <h4 class="text-md font-black mb-3 uppercase tracking-widest text-white border-b border-gray-800 pb-1" data-i18n="footer_bases_title">OUR BASES</h4>
+            
+            <div class="text-gray-400">
+                <span class="font-bold text-red-400" data-i18n="footer_moscow_location">MOSCOW | HUB</span> 
+                <p class="text-xs text-gray-600" data-i18n="footer_moscow_desc">Office and Main Studio</p>
+            </div>
+            
+            <div class="text-gray-400 pt-2">
+                <span class="font-bold text-red-400" data-i18n="footer_phuket_location">PHUKET | RESIDENCE</span> 
+                <p class="text-xs text-gray-600" data-i18n="footer_phuket_desc">International Production</p>
+            </div>
+        </div>
+    </div>
+
+    
+
+<div class="max-w-7xl mx-auto mt-12 pt-6 border-t border-gray-800 text-center">
+        <p class="text-xs text-gray-700 uppercase tracking-widest" data-i18n="footer_copyright">
+            &copy; 2024 KADRA Global Music House. ALL RIGHTS RESERVED.
+        </p>
+    </div>
+</footer>
+
+<script>
+    // --- 1. LANGUAGE DATA STORE ---
+    const translations = {
+        'en': {
+            // Navigation
+            nav_about: 'ABOUT US',
+            nav_services: 'SERVICES',
+            nav_services_pricing: 'SERVICES & PRICING',
+            nav_portfolio: 'PORTFOLIO',
+            nav_contact: 'CONTACT',
+            // Hero
+            hero_subtitle: 'GLOBAL MUSIC HOUSE',
+            hero_tagline: 'PRODUCTION. <span class="accent-red font-bold">INNOVATION.</span> PLATINUM. <span class="text-white font-bold">YOUR SOUND IS LUXURY.</span>',
+            hero_button: 'ORDER PRODUCTION',
+            hero_locations: 'MOSCOW (HUB) | PHUKET (RESIDENCY)',
+            // Services
+            services_title: 'DIGITAL PRODUCTION',
+            services_intro: 'We break geographical barriers. Your project achieves studio quality and Platinum Standard, regardless of your location.',
+            service1_title: 'GLOBAL REACH',
+            service1_text: '100% ONLINE. Working with time zones from Moscow to New York, ensuring perfect sync.',
+            service2_title: 'PLATINUM STANDARD',
+            service2_text: 'Chart-proven quality. Tracks created at KADRA regularly hit TOP lists.',
+            service3_title: 'BUSINESS APPROACH',
+            service3_text: 'We don\'t just make music. We build sonic identity that sells your brand and maximizes royalties.',
+            // Projects
+            projects_title: 'PLATINUM SOUND',
+            projects_intro: 'Listen to the best releases created with our involvement. Every track is a potential hit.',
+            projects_cta: 'Hover and press PLAY.',
+            prod_mekhman: 'MEKHMAN (Full Prod. KADRA)',
+            prod_tkimali: 'TKIMALI ft. Lolita (Sound Design KADRA)',
+            prod_zomb: 'ZOMB (Mastering by KADRA)',
+            prod_ganvest: 'GANVEST (Mixing & Mastering)',
+            prod_kagramanov: 'KAGRAMANOV (Sound Engineering)',
+            prod_beat_title: 'NEW BEAT',
+            prod_beat_subtitle: 'EXCLUSIVE | CHILL WAVE',
+            prod_remix_title: 'FIRE BEAT REMIX',
+            prod_remix_subtitle: 'PROD. KADRA',
+            prod_sample_title: 'SAMPLE PACK V3',
+            prod_sample_subtitle: 'ROYALTY FREE | DOWNLOAD',
+            projects_button: 'MORE PROJECTS',
+            // Team
+            team_title: 'OUR TEAM & PARTNERS',
+            team_tkimali_role: 'PRODUCER',
+            team_ganvest_role: 'MASTERING',
+            team_lolita_role: 'COLLAB',
+            team_kagramanov_role: 'PANTHER',
+            team_new_artist_name: 'NEW ARTIST',
+            team_new_artist_role: 'SOUND DESIGN',
+            // Pricing
+            pricing_title: 'INVESTMENT IN SOUND',
+            price_gold_title: 'GOLD',
+            price_gold_subtitle: 'Mixing & Mastering',
+            price_gold_unit: '/ TRACK',
+            gold_feature1: 'Full Audio Engineering',
+            gold_feature2: 'Vocal Tuning / Correction (Included)',
+            gold_feature3: 'CHART READY Loudness',
+            gold_feature4: 'Turnaround: 4–6 business days',
+            gold_button: 'ORDER GOLD',
+            price_platinum_title: 'PLATINUM',
+            platinum_tag: 'BEST CHOICE',
+            price_platinum_subtitle: 'TURNKEY PRODUCTION',
+            price_platinum_unit: '/ TRACK',
+            platinum_feature1: 'Full Music Production (From Idea to Master)',
+            platinum_feature2: 'Mixing & Mastering',
+            platinum_feature2_addon: '(INCLUDED)',
+            platinum_feature3: '100% EXCLUSIVE Rights',
+            platinum_feature4: 'Priority Studio Slot',
+            platinum_feature5: 'Producer On-Call Support',
+            platinum_button: 'START PLATINUM PROD',
+            price_exclusive_title: 'EXCLUSIVE',
+            price_exclusive_subtitle: 'Custom Beat',
+            price_exclusive_unit: '/ BEAT',
+            exclusive_feature1: 'Unique Custom Beat',
+            exclusive_feature2: 'Exclusive Rights for Monetization',
+            exclusive_feature3: 'WAV/MP3 + STEMS (Tracks)',
+            exclusive_feature4: 'Up to 3 rounds of revisions',
+            exclusive_button: 'ORDER EXCLUSIVE',
+            pricing_disclaimer: 'Prices are for reference. The exact cost is calculated individually after discussing the technical brief.',
+            // Contact
+            contact_title: 'CONTACT US',
+            contact_intro: 'Write to us via your preferred messenger or submit a request. We will contact you within one business day.',
+            // Footer
+            footer_slogan: 'PRODUCTION AIMED AT CHARTS',
+            footer_mission: 'We are your strategic partner in the music world, guaranteeing world-class sound.',
+            footer_menu_title: 'MENU',
+            footer_request: 'Request',
+            footer_contacts_title: 'CONTACTS',
+            footer_call_hours: 'CALL HOURS: MON-FRI',
+            footer_bases_title: 'OUR BASES',
+            footer_moscow_location: 'MOSCOW | HUB',
+            footer_moscow_desc: 'Office and Main Studio',
+            footer_phuket_location: 'PHUKET | RESIDENCE',
+            footer_phuket_desc: 'International Production',
+            footer_copyright: '© 2024 KADRA Global Music House. ALL RIGHTS RESERVED.',
+        },
+        'ru': {
+            // Navigation
+            nav_about: 'О НАС',
+            nav_services: 'УСЛУГИ',
+            nav_services_pricing: 'УСЛУГИ И ЦЕНЫ',
+            nav_portfolio: 'ПОРТФОЛИО',
+            nav_contact: 'КОНТАКТЫ',
+            // Hero
+            hero_subtitle: 'ГЛОБАЛЬНЫЙ МУЗЫКАЛЬНЫЙ ДОМ',
+            hero_tagline: 'ПРОДАКШН. <span class="accent-red font-bold">ИННОВАЦИИ.</span> ПЛАТИНА. <span class="text-white font-bold">ТВОЙ ЗВУК – ЭТО РОСКОШЬ.</span>',
+            hero_button: 'ЗАКАЗАТЬ ПРОДАКШН',
+            hero_locations: 'МОСКВА (ХАБ) | ПХУКЕТ (РЕЗИДЕНЦИЯ)',
+            // Services
+            services_title: 'ЦИФРОВОЙ ПРОДАКШН',
+            services_intro: 'Мы стираем географические границы. Ваш проект достигнет студийного качества и Platinum-стандарта, независимо от вашего местоположения.',
+            service1_title: 'ГЛОБАЛЬНЫЙ ОХВАТ',
+            service1_text: '100% ОНЛАЙН. Работаем с часовыми поясами от Москвы до Нью-Йорка, обеспечивая идеальную синхронизацию.',
+            service2_title: 'ПЛАТИНОВЫЙ СТАНДАРТ',
+            service2_text: 'Качество, проверенное чартами. Треки, созданные в KADRA, регулярно попадают в ТОП-листы.',
+            service3_title: 'БИЗНЕС-ПОДХОД',
+            service3_text: 'Мы не просто делаем музыку. Мы создаем звуковую идентичность, которая продает ваш бренд и максимизирует роялти.',
+            // Projects
+            projects_title: 'ПЛАТИНОВЫЙ ЗВУК',
+            projects_intro: 'Послушайте лучшие релизы, созданные при нашем участии. Каждый трек — потенциальный хит.',
+            projects_cta: 'Наведите курсор и нажмите PLAY.',
+            prod_mekhman: 'MEKHMAN (Полный продакшн KADRA)',
+            prod_tkimali: 'TKIMALI ft. Lolita (Саунд-дизайн KADRA)',
+            prod_zomb: 'ZOMB (Мастеринг KADRA)',
+            prod_ganvest: 'GANVEST (Сведение и мастеринг)',
+            prod_kagramanov: 'KAGRAMANOV (Саунд-инжиниринг)',
+            prod_beat_title: 'НОВЫЙ БИТ',
+            prod_beat_subtitle: 'ЭКСКЛЮЗИВ | CHILL WAVE',
+            prod_remix_title: 'FIRE BEAT REMIX',
+            prod_remix_subtitle: 'ПРОД. KADRA',
+            prod_sample_title: 'СЭМПЛ ПАК V3',
+            prod_sample_subtitle: 'ROYALTY FREE | СКАЧАТЬ',
+            projects_button: 'БОЛЬШЕ ПРОЕКТОВ',
+            // Team
+            team_title: 'НАША КОМАНДА И ПАРТНЕРЫ',
+            team_tkimali_role: 'ПРОДЮСЕР',
+            team_ganvest_role: 'МАСТЕРИНГ',
+            team_lolita_role: 'КОЛЛАБ',
+            team_kagramanov_role: 'ПАНТЕРА',
+            team_new_artist_name: 'НОВЫЙ АРТИСТ',
+            team_new_artist_role: 'САУНД-ДИЗАЙН',
+            // Pricing
+            pricing_title: 'ИНВЕСТИЦИЯ В ЗВУК',
+            price_gold_title: 'GOLD',
+            price_gold_subtitle: 'Сведение и Мастеринг',
+            price_gold_unit: '/ ТРЕК',
+            gold_feature1: 'Полный Аудио-инжиниринг',
+            gold_feature2: 'Тюнинг / Коррекция Вокала (Включено)',
+            gold_feature3: 'Громкость уровня ЧАРТОВ',
+            gold_feature4: 'Сроки: 4–6 рабочих дней',
+            gold_button: 'ЗАКАЗАТЬ GOLD',
+            price_platinum_title: 'PLATINUM',
+            platinum_tag: 'ЛУЧШИЙ ВЫБОР',
+            price_platinum_subtitle: 'ПРОДАКШН "ПОД КЛЮЧ"',
+            price_platinum_unit: '/ ТРЕК',
+            platinum_feature1: 'Полный Музыкальный Продакшн (От Идеи до Мастера)',
+            platinum_feature2: 'Сведение и Мастеринг',
+            platinum_feature2_addon: '(ВКЛЮЧЕНО)',
+            platinum_feature3: '100% ЭКСКЛЮЗИВНЫЕ Права',
+            platinum_feature4: 'Приоритетный Студийный Слот',
+            platinum_feature5: 'Поддержка Продюсера 24/7',
+            platinum_button: 'СТАРТ PLATINUM PROD',
+            price_exclusive_title: 'EXCLUSIVE',
+            price_exclusive_subtitle: 'Эксклюзивный Бит',
+            price_exclusive_unit: '/ БИТ',
+            exclusive_feature1: 'Уникальный Авторский Бит',
+            exclusive_feature2: 'Эксклюзивные Права для Монетизации',
+            exclusive_feature3: 'WAV/MP3 + STEMS (Дорожки)',
+            exclusive_feature4: 'До 3 раундов правок',
+            exclusive_button: 'ЗАКАЗАТЬ EXCLUSIVE',
+            pricing_disclaimer: 'Цены указаны для ознакомления. Точная стоимость рассчитывается индивидуально после обсуждения технического задания.',
+            // Contact
+            contact_title: 'СВЯЗАТЬСЯ С НАМИ',
+            contact_intro: 'Напишите нам через удобный мессенджер или отправьте заявку. Мы свяжемся с вами в течение одного рабочего дня.',
+            // Footer
+            footer_slogan: 'ПРОДАКШН, НАЦЕЛЕННЫЙ НА ЧАРТЫ',
+            footer_mission: 'Мы ваш стратегический партнер в мире музыки, гарантирующий звучание мирового класса.',
+            footer_menu_title: 'МЕНЮ',
+            footer_request: 'Заявка',
+            footer_contacts_title: 'КОНТАКТЫ',
+            footer_call_hours: 'ЧАСЫ РАБОТЫ: ПН-ПТ',
+            footer_bases_title: 'НАШИ БАЗЫ',
+            footer_moscow_location: 'МОСКВА | ХАБ',
+            footer_moscow_desc: 'Офис и Главная Студия',
+            footer_phuket_location: 'ПХУКЕТ | РЕЗИДЕНЦИЯ',
+            footer_phuket_desc: 'Международный Продакшн',
+            footer_copyright: '© 2024 KADRA Global Music House. ВСЕ ПРАВА ЗАЩИЩЕНЫ.',
+        }
+    };
+
+    let currentLang = 'en';
+
+    /**
+     * Loads the language preference from localStorage or defaults to English,
+     * then updates the UI.
+     */
+    function loadLanguage() {
+        const storedLang = localStorage.getItem('kadraLang');
+        if (storedLang && translations[storedLang]) {
+            currentLang = storedLang;
+        } else {
+            // Default to English if no preference is stored
+            currentLang = 'en';
+        }
+        updateContent();
+    }
+
+    /**
+     * Switches the language (EN/RU), saves the preference, and updates the UI.
+     */
+    function toggleLanguage() {
+        currentLang = currentLang === 'en' ? 'ru' : 'en';
+        localStorage.setItem('kadraLang', currentLang);
+        updateContent();
+        
+        // Close mobile menu after language change for clean UI
+        const menu = document.getElementById('mobile-menu');
+        if (!menu.classList.contains('hidden')) {
+            toggleMenu();
+        }
+    }
+
+    /**
+     * Iterates through all elements with data-i18n attributes and updates their content.
+     */
+    function updateContent() {
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            const translation = translations[currentLang][key];
+            if (translation) {
+                // Use innerHTML to allow for bold/span tags within translations
+                element.innerHTML = translation;
+            }
+        });
+        
+        // Set the main language attribute
+        document.documentElement.lang = currentLang;
+
+        // Update titles if necessary (though the main title is static KADRA)
+        // document.title = translations[currentLang].document_title;
+    }
+
+    // --- 2. MENU FUNCTIONS (EXISTING) ---
+    function toggleMenu() {
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('hidden');
+    }
+    
+    document.getElementById('mobile-menu-button').addEventListener('click', toggleMenu);
+
+    // Close menu when clicking a link (for mobile)
+    document.querySelectorAll('#mobile-menu a').forEach(item => {
+        item.addEventListener('click', toggleMenu);
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                // Smooth scroll to the element with a small offset from the header
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80, // 80px offset from top
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Initialize on page load
+    window.onload = loadLanguage;
+</script>
+
+</body>
+</html>
