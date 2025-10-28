@@ -590,7 +590,7 @@ buttons.forEach(btn => {
       OUR TEAM & PARTNERS
     </h2>
 
-    <div class="flex overflow-x-auto space-x-6 pb-6 snap-x snap-mandatory scrollbar-hide">
+    <div class="flex overflow-x-auto space-x-6 pb-6 snap-x snap-mandatory scrollbar-hide cursor-grab active:cursor-grabbing">
       <!-- Кружок -->
       <div class="flex-shrink-0 w-40 sm:w-48 md:w-52 snap-start flex flex-col items-center">
         <img class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-2" src="img/tkimal.jpg" alt="Photo of Tkimali">
@@ -637,10 +637,53 @@ buttons.forEach(btn => {
     display: none;
   }
   .scrollbar-hide {
-    -ms-overflow-style: none;  /* IE and Edge */
+    -ms-overflow-style: none;  /* IE и Edge */
     scrollbar-width: none;  /* Firefox */
   }
+
+  /* Для плавного свайпа на ПК с мышкой */
+  .cursor-grab {
+    cursor: grab;
+  }
+  .active\:cursor-grabbing:active {
+    cursor: grabbing;
+  }
+
+  /* Скролл мышкой */
+  .artist-scroll-container {
+    scroll-behavior: smooth;
+  }
 </style>
+
+<script>
+  // Делаем скролл “перетаскиванием мышки” для ПК
+  const slider = document.querySelector('.overflow-x-auto');
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  slider.addEventListener('mousedown', (e) => {
+    isDown = true;
+    slider.classList.add('active:cursor-grabbing');
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+  slider.addEventListener('mouseleave', () => {
+    isDown = false;
+    slider.classList.remove('active:cursor-grabbing');
+  });
+  slider.addEventListener('mouseup', () => {
+    isDown = false;
+    slider.classList.remove('active:cursor-grabbing');
+  });
+  slider.addEventListener('mousemove', (e) => {
+    if(!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 2; // скорость прокрутки
+    slider.scrollLeft = scrollLeft - walk;
+  });
+</script>
 
 
 <!-- Подключаем Swiper JS -->
