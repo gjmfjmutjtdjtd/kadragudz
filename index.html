@@ -590,38 +590,33 @@ buttons.forEach(btn => {
       OUR TEAM & PARTNERS
     </h2>
 
-    <div class="flex overflow-x-auto space-x-6 pb-6 snap-x snap-mandatory scrollbar-hide cursor-grab active:cursor-grabbing">
-      <!-- Кружок -->
+    <div class="artist-scroll flex overflow-x-auto space-x-6 pb-6 snap-x snap-mandatory scrollbar-hide cursor-grab">
+      <!-- Кружки -->
       <div class="flex-shrink-0 w-40 sm:w-48 md:w-52 snap-start flex flex-col items-center">
         <img class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-2" src="img/tkimal.jpg" alt="Photo of Tkimali">
         <p>Tkimali</p>
         <p class="artist-role" data-i18n="team_tkimali_role">top 100</p>
       </div>
-
       <div class="flex-shrink-0 w-40 sm:w-48 md:w-52 snap-start flex flex-col items-center">
         <img class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-2" src="img/mekhman.png" alt="Photo of Mekhman">
         <p>Mekhman</p>
         <p class="artist-role">top 100 | 68M+ HITS</p>
       </div>
-
       <div class="flex-shrink-0 w-40 sm:w-48 md:w-52 snap-start flex flex-col items-center">
         <img class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-2" src="img/ganwes.png" alt="Photo of Ganvest">
         <p>Ganvest</p>
         <p class="artist-role" data-i18n="team_ganvest_role">top 100</p>
       </div>
-
       <div class="flex-shrink-0 w-40 sm:w-48 md:w-52 snap-start flex flex-col items-center">
         <img class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-2" src="img/lolit.png" alt="Photo of Lolita">
         <p>Lolita</p>
         <p class="artist-role" data-i18n="team_lolita_role">COLLAB</p>
       </div>
-
       <div class="flex-shrink-0 w-40 sm:w-48 md:w-52 snap-start flex flex-col items-center">
         <img class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-2" src="img/kagra.png" alt="Photo of Kagramanov">
         <p>Kagramanov</p>
         <p class="artist-role" data-i18n="team_kagramanov_role">top 100</p>
       </div>
-
       <div class="flex-shrink-0 w-40 sm:w-48 md:w-52 snap-start flex flex-col items-center">
         <img class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-2" src="img/ruslan.jpg" alt="New Artist">
         <p data-i18n="team_new_artist_name">ruslan gudz</p>
@@ -632,57 +627,55 @@ buttons.forEach(btn => {
 </section>
 
 <style>
-  /* Скрываем стандартный скролл на всех браузерах */
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-  .scrollbar-hide {
-    -ms-overflow-style: none;  /* IE и Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
-  /* Для плавного свайпа на ПК с мышкой */
-  .cursor-grab {
-    cursor: grab;
-  }
-  .active\:cursor-grabbing:active {
-    cursor: grabbing;
-  }
+  .cursor-grab { cursor: grab; }
+  .cursor-grabbing { cursor: grabbing; }
 
-  /* Скролл мышкой */
-  .artist-scroll-container {
-    scroll-behavior: smooth;
-  }
+  .artist-scroll { scroll-behavior: smooth; }
 </style>
 
 <script>
-  // Делаем скролл “перетаскиванием мышки” для ПК
-  const slider = document.querySelector('.overflow-x-auto');
-  let isDown = false;
-  let startX;
-  let scrollLeft;
+const slider = document.querySelector('.artist-scroll');
 
-  slider.addEventListener('mousedown', (e) => {
-    isDown = true;
-    slider.classList.add('active:cursor-grabbing');
-    startX = e.pageX - slider.offsetLeft;
-    scrollLeft = slider.scrollLeft;
-  });
-  slider.addEventListener('mouseleave', () => {
-    isDown = false;
-    slider.classList.remove('active:cursor-grabbing');
-  });
-  slider.addEventListener('mouseup', () => {
-    isDown = false;
-    slider.classList.remove('active:cursor-grabbing');
-  });
-  slider.addEventListener('mousemove', (e) => {
-    if(!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - slider.offsetLeft;
-    const walk = (x - startX) * 2; // скорость прокрутки
-    slider.scrollLeft = scrollLeft - walk;
-  });
+let isDown = false;
+let startX;
+let scrollLeft;
+let velocity = 0;
+let momentumID;
+
+slider.addEventListener('mousedown', (e) => {
+  isDown = true;
+  slider.classList.add('cursor-grabbing');
+  startX = e.pageX - slider.offsetLeft;
+  scrollLeft = slider.scrollLeft;
+  cancelAnimationFrame(momentumID); // останавливаем предыдущий моментум
+});
+
+slider.addEventListener('mouseleave', () => { isDown = false; slider.classList.remove('cursor-grabbing'); });
+slider.addEventListener('mouseup', () => { isDown = false; slider.classList.remove('cursor-grabbing'); startMomentum(); });
+
+slider.addEventListener('mousemove', (e) => {
+  if(!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - slider.offsetLeft;
+  const walk = (x - startX);
+  velocity = walk;
+  slider.scrollLeft = scrollLeft - walk;
+});
+
+// плавный моментум после отпускания мышки
+function startMomentum() {
+  let decay = 0.95;
+  function momentum() {
+    if(Math.abs(velocity) < 0.5) return;
+    slider.scrollLeft -= velocity;
+    velocity *= decay;
+    momentumID = requestAnimationFrame(momentum);
+  }
+  momentum();
+}
 </script>
 
 
