@@ -586,41 +586,41 @@ buttons.forEach(btn => {
 
 <section class="py-16 px-4">
   <div class="max-w-7xl mx-auto">
-    <h2 class="text-3xl sm:text-5xl font-black text-white mb-10 uppercase border-b-2 border-red-600 pb-3 inline-block" data-i18n="team_title">
+    <h2 class="text-3xl sm:text-5xl font-black text-white mb-10 uppercase border-b-2 border-red-600 pb-3 inline-block">
       OUR TEAM & PARTNERS
     </h2>
 
-    <div class="artist-scroll flex overflow-x-auto space-x-6 pb-6 snap-x snap-mandatory scrollbar-hide cursor-grab">
+    <div class="artist-scroll flex overflow-x-auto space-x-3 pb-6 snap-x snap-mandatory scrollbar-hide cursor-grab">
       <!-- Кружки -->
-      <div class="flex-shrink-0 w-40 sm:w-48 md:w-52 snap-start flex flex-col items-center">
-        <img class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-2" src="img/tkimal.jpg" alt="Photo of Tkimali">
+      <div class="flex-shrink-0 w-36 sm:w-40 md:w-44 snap-start flex flex-col items-center">
+        <img class="w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover mb-2" src="img/tkimal.jpg" alt="Tkimali">
         <p>Tkimali</p>
-        <p class="artist-role" data-i18n="team_tkimali_role">top 100</p>
+        <p class="artist-role">top 100</p>
       </div>
-      <div class="flex-shrink-0 w-40 sm:w-48 md:w-52 snap-start flex flex-col items-center">
-        <img class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-2" src="img/mekhman.png" alt="Photo of Mekhman">
+      <div class="flex-shrink-0 w-36 sm:w-40 md:w-44 snap-start flex flex-col items-center">
+        <img class="w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover mb-2" src="img/mekhman.png" alt="Mekhman">
         <p>Mekhman</p>
         <p class="artist-role">top 100 | 68M+ HITS</p>
       </div>
-      <div class="flex-shrink-0 w-40 sm:w-48 md:w-52 snap-start flex flex-col items-center">
-        <img class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-2" src="img/ganwes.png" alt="Photo of Ganvest">
+      <div class="flex-shrink-0 w-36 sm:w-40 md:w-44 snap-start flex flex-col items-center">
+        <img class="w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover mb-2" src="img/ganwes.png" alt="Ganvest">
         <p>Ganvest</p>
-        <p class="artist-role" data-i18n="team_ganvest_role">top 100</p>
+        <p class="artist-role">top 100</p>
       </div>
-      <div class="flex-shrink-0 w-40 sm:w-48 md:w-52 snap-start flex flex-col items-center">
-        <img class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-2" src="img/lolit.png" alt="Photo of Lolita">
+      <div class="flex-shrink-0 w-36 sm:w-40 md:w-44 snap-start flex flex-col items-center">
+        <img class="w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover mb-2" src="img/lolit.png" alt="Lolita">
         <p>Lolita</p>
-        <p class="artist-role" data-i18n="team_lolita_role">COLLAB</p>
+        <p class="artist-role">COLLAB</p>
       </div>
-      <div class="flex-shrink-0 w-40 sm:w-48 md:w-52 snap-start flex flex-col items-center">
-        <img class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-2" src="img/kagra.png" alt="Photo of Kagramanov">
+      <div class="flex-shrink-0 w-36 sm:w-40 md:w-44 snap-start flex flex-col items-center">
+        <img class="w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover mb-2" src="img/kagra.png" alt="Kagramanov">
         <p>Kagramanov</p>
-        <p class="artist-role" data-i18n="team_kagramanov_role">top 100</p>
+        <p class="artist-role">top 100</p>
       </div>
-      <div class="flex-shrink-0 w-40 sm:w-48 md:w-52 snap-start flex flex-col items-center">
-        <img class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-2" src="img/ruslan.jpg" alt="New Artist">
-        <p data-i18n="team_new_artist_name">ruslan gudz</p>
-        <p class="artist-role" data-i18n="team_new_artist_role">SOUND DESIGN kadra</p>
+      <div class="flex-shrink-0 w-36 sm:w-40 md:w-44 snap-start flex flex-col items-center">
+        <img class="w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover mb-2" src="img/ruslan.jpg" alt="Ruslan">
+        <p>Ruslan</p>
+        <p class="artist-role">SOUND DESIGN</p>
       </div>
     </div>
   </div>
@@ -633,7 +633,19 @@ buttons.forEach(btn => {
   .cursor-grab { cursor: grab; }
   .cursor-grabbing { cursor: grabbing; }
 
-  .artist-scroll { scroll-behavior: smooth; }
+  .artist-scroll {
+    scroll-behavior: smooth;
+    user-select: none;          /* отключаем выделение текста */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+
+  .artist-scroll img {
+    pointer-events: none;       /* картинки не мешают drag */
+    user-drag: none;
+    -webkit-user-drag: none;
+  }
 </style>
 
 <script>
@@ -645,12 +657,14 @@ let scrollLeft;
 let velocity = 0;
 let momentumID;
 
+// Перетаскивание мышкой
 slider.addEventListener('mousedown', (e) => {
+  e.preventDefault();
   isDown = true;
   slider.classList.add('cursor-grabbing');
   startX = e.pageX - slider.offsetLeft;
   scrollLeft = slider.scrollLeft;
-  cancelAnimationFrame(momentumID); // останавливаем предыдущий моментум
+  cancelAnimationFrame(momentumID);
 });
 
 slider.addEventListener('mouseleave', () => { isDown = false; slider.classList.remove('cursor-grabbing'); });
@@ -665,7 +679,7 @@ slider.addEventListener('mousemove', (e) => {
   slider.scrollLeft = scrollLeft - walk;
 });
 
-// плавный моментум после отпускания мышки
+// Инерция после отпускания мышки
 function startMomentum() {
   let decay = 0.95;
   function momentum() {
