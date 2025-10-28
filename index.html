@@ -179,6 +179,26 @@
             letter-spacing: 0.05em;
         }
 
+        /* FIX: Mobile Scaling for Artist Cards (prevents oval shape) */
+        @media (max-width: 400px) {
+             .artist-circle-card {
+                width: 110px; /* Adjust card width for smaller phones */
+                padding: 5px;
+             }
+             .artist-circle-card img {
+                 width: 90px; /* Smaller image size, maintaining 1:1 aspect ratio */
+                 height: 90px;
+                 border-width: 2px; /* Slight border reduction */
+             }
+             .artist-circle-card p {
+                font-size: 0.8rem;
+             }
+             .artist-circle-card .artist-role {
+                font-size: 0.6rem;
+             }
+        }
+
+
         /* REDESIGNED PRICE CARD STYLES */
         .price-card {
             background-color: #1a1a1a;
@@ -634,13 +654,9 @@
         </div>
     </div>
     
+    <!-- UPDATED: Removed hardcoded RU text and rely on translation for file submission instructions -->
     <div class="text-center mt-16 text-gray-500 text-sm italic border-t border-gray-800 pt-8">
-        <p data-i18n="pricing_disclaimer">Как прислать файлы для сведения? 
-			Для качественного сведения нам нужны отдельные дорожки вашего трека в формате WAV. Экспортируйте каждую дорожку (вокал, гитара, барабаны и т.д.) из вашей DAW как отдельный WAV-файл.
-			Убедитесь, что все файлы начинаются с одной и той же временной отметки (0:00) и имеют одинаковую длину, даже если на какой-то дорожке нет звука в начале или в конце. 
-			Не применяйте компрессию, эквализацию или другие эффекты на мастер-шине. Пожалуйста, оставьте дорожки "сухими" (без обработки, кроме креативных эффектов, которые вы хотите сохранить). 
-			Архивируйте все WAV-файлы в один .zip или .rar архив. Пришлите архив на нашу почту:
-					[thekadrainfo.com] (если файл слишком большой, используйте файлообменник, например, Google Drive, Яндекс.Диск или WeTransfer). Это гарантирует наилучший результат при сведении!</p>
+        <p data-i18n="pricing_disclaimer"></p>
   </div>
 </section>
 
@@ -722,7 +738,7 @@
         
 
 <div class="footer-link-group space-y-3">
-            <h4 class="text-md font-black mb-3 uppercase tracking-widest text-white border-b border-gray-800 pb-1" data-i18n="footer_bases_title">OUR BASES</h4>
+            <h4 class="text-md font-black mb-3 uppercase tracking-widest text-white border-b border-gray-800 pb-1" data-i18n="footer_bases_title">OUR BASES">OUR BASES</h4>
             
             <div class="text-gray-400">
                 <span class="font-bold text-red-400" data-i18n="footer_moscow_location">MOSCOW | HUB</span> 
@@ -822,7 +838,8 @@
             exclusive_feature3: 'WAV/MP3 + STEMS (Tracks)',
             exclusive_feature4: 'Up to 3 rounds of revisions',
             exclusive_button: 'ORDER EXCLUSIVE',
-            pricing_disclaimer: 'Prices are for reference. The exact cost is calculated individually after discussing the technical brief.',
+            // UPDATED: Long text for file submission instructions
+            pricing_disclaimer: 'How to submit files for mixing? For high-quality mixing, we require separate tracks of your song in WAV format. Export each track (vocals, guitar, drums, etc.) from your DAW as an individual WAV file. Ensure all files start at the same timestamp (0:00) and have the same length. Please leave tracks "dry" (without processing, except for creative effects you wish to keep). Archive all WAV files into one .zip or .rar archive and send it to our email: [thekadrainfo.com] (use a file-sharing service like Google Drive or WeTransfer if the file is too large). This guarantees the best mixing result!',
             // Contact
             contact_title: 'CONTACT US',
             contact_intro: 'Write to us via your preferred messenger or submit a request. We will contact you within one business day.',
@@ -883,7 +900,7 @@
             team_ganvest_role: 'top 100',
             team_lolita_role: 'КОЛЛАБ',
             team_kagramanov_role: 'top 100',
-            team_new_artist_name: 'top 100',
+            team_new_artist_name: 'Ruslan Gudz',
             team_new_artist_role: 'САУНД-ДИЗАЙН',
             // Pricing
             pricing_title: 'ЦЕНЫ И УСЛУГИ',
@@ -914,7 +931,8 @@
             exclusive_feature3: 'WAV/MP3 + STEMS (Дорожки)',
             exclusive_feature4: 'До 3 раундов правок',
             exclusive_button: 'ЗАКАЗАТЬ EXCLUSIVE',
-            pricing_disclaimer: 'Цены указаны для ознакомления. Точная стоимость рассчитывается индивидуально после обсуждения технического задания.',
+            // UPDATED: Long text for file submission instructions
+            pricing_disclaimer: 'Как прислать файлы для сведения? Для качественного сведения нам нужны отдельные дорожки вашего трека в формате WAV. Экспортируйте каждую дорожку (вокал, гитара, барабаны и т.д.) из вашей DAW как отдельный WAV-файл. Убедитесь, что все файлы начинаются с одной и той же временной отметки (0:00) и имеют одинаковую длину, даже если на какой-то дорожке нет звука в начале или в конце. Не применяйте компрессию, эквализацию или другие эффекты на мастер-шине. Пожалуйста, оставьте дорожки "сухими" (без обработки, кроме креативных эффектов, которые вы хотите сохранить). Архивируйте все WAV-файлы в один .zip или .rar архив. Пришлите архив на нашу почту: [thekadrainfo.com] (если файл слишком большой, используйте файлообменник, например, Google Drive, Яндекс.Диск или WeTransfer). Это гарантирует наилучший результат при сведении!',
             // Contact
             contact_title: 'СВЯЗАТЬСЯ С НАМИ',
             contact_intro: 'Напишите нам через удобный мессенджер или отправьте заявку. Мы свяжемся с вами в течение одного рабочего дня.',
@@ -1021,5 +1039,3 @@
 
 </body>
 </html>
-
-
